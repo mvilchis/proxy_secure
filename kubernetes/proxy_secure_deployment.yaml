@@ -1,19 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-    name: webhook-dummy
+    name: webhook-proxy_secure
 spec:
    replicas: 1
    selector:
      matchLabels:
-       app: webhook-dummy
+       app: webhook-proxy_secure
    template:
      metadata:
        labels:
-         app: webhook-dummy
+         app: webhook-proxy_secure
      spec:
        containers:
-         - name: webhook-dummy
+         - name: webhook-proxy_secure
            image: mvilchis/imagenACambiar
            imagePullPolicy: Always
            env:
