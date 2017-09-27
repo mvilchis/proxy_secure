@@ -19,6 +19,8 @@ spec:
            env:
              - name: WEBHOOK_PORT
                value: '5000'
+             - name: TOKEN_MISALUD
+               value: 436d7fcbf36d026aba085a8adfa7f14796c06a38
            ports:
              - containerPort: 5000
            resources: {}

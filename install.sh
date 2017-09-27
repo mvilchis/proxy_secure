@@ -20,7 +20,7 @@ git pull template master
 
 mv kubernetes/webhook_deployment.yaml  kubernetes/${PROJECT_NAME}_deployment.yaml
 mv kubernetes/webhook_service.yaml  kubernetes/${PROJECT_NAME}_service.yaml
-find ./ -type f -exec sed -i -e "s/-dummy/-${PROJECT_NAME}/g" {} \;
+find ./ -type f -exec sed -i -e "s/-proxy_secure/-${PROJECT_NAME}/g" {} \;
 
 ########## END KUBERNETES FILE  #########
 
