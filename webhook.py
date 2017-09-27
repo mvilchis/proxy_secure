@@ -66,8 +66,8 @@ def secure_proxy(name=None):
         return json.dumps({ "error": "error" }), 400
     if type_operation == "create_contact":
         token = 'token %s' % TOKEN_RP
-        url = 'https://rapidpro.datos.gob.mx/api/v2/contacts.json'
-        headers = {'content-type': 'application/json', 'Authorization': token}
+
+        /json', 'Authorization': token}
         payload = { "name":name, "urns": [urns]}
         print payload
         r = requests.post(url, data = json.dumps(payload), headers=headers)
@@ -95,4 +95,5 @@ def secure_proxy(name=None):
 
 if __name__ == "__main__":
     app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.config['CORS_HEADERS'] = 'Content-Type'
     app.run(debug=True,host="0.0.0.0", port= int(os.getenv('WEBHOOK_PORT', 5000)))
