@@ -66,8 +66,7 @@ def secure_proxy(name=None):
         return json.dumps({ "error": "error" }), 400
     if type_operation == "create_contact":
         token = 'token %s' % TOKEN_RP
-
-        /json', 'Authorization': token}
+        headers = {'content-type': 'application/json', 'Authorization': token}
         payload = { "name":name, "urns": [urns]}
         print payload
         r = requests.post(url, data = json.dumps(payload), headers=headers)
