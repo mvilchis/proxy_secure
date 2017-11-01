@@ -62,8 +62,6 @@ def secure_proxy(name=None):
     flow = request.args.get("flow")
     type_operation = request.args.get('type_operation')
     token = request.args.get('token')
-    print TOKEN_MISALUD
-    print token
     if token != TOKEN_MISALUD:
         return json.dumps({ "error": "error" }), 400
     if type_operation == "create_contact":
@@ -71,7 +69,6 @@ def secure_proxy(name=None):
         url = 'https://rapidpro.datos.gob.mx/api/v2/contacts.json'
         headers = {'content-type': 'application/json', 'Authorization': token}
         payload = { "urns": [urns]}
-        print payload
         r = requests.post(url, data = json.dumps(payload), headers=headers)
         if r.ok:
            return {"uuid": r.json()["uuid"]}
@@ -80,10 +77,7 @@ def secure_proxy(name=None):
         url = 'https://rapidpro.datos.gob.mx/api/v2/contacts.json'
         headers = {'content-type': 'application/json', 'Authorization': token}
         payload = {"urn":urns}
-        print payload
         r = requests.get(url, params = payload, headers=headers)
-        print r.url
-        print "*"*10
         if r.ok:
            return {"uuid": r.json()["results"][0]["uuid"]}
     if type_operation == "star_conversation":
