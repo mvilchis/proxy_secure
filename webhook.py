@@ -9,6 +9,7 @@ from functools import update_wrapper
 app = FlaskAPI(__name__)
 TOKEN_MISALUD = os.getenv('TOKEN_MISALUD', "")
 TOKEN_RP = os.getenv('TOKEN_RP', "")
+RP_URL= os.getenv('RP_URL', "")
 
 def crossdomain(origin=None, methods=None, headers=None,
                 max_age=21600, attach_to_all=True,
@@ -82,10 +83,17 @@ def secure_proxy(name=None):
            return {"uuid": r.json()["results"][0]["uuid"]}
     if type_operation == "star_conversation":
         token = 'token %s' % TOKEN_RP
-        url = 'https://rapidpro.datos.gob.mx/api/v2/flow_starts.json'
-        headers = {'content-type': 'application/json', 'Authorization': token}
-        payload = {"flow": flow, "contacts": [contacts], "restart_participants":"true"}
-        r = requests.post(url, data = json.dumps(payload), headers=headers)
+        payload={"backend":"Telcel",
+                "sender":contacts,
+                "ts":"1",
+                "id":"758af0a175f8a86"}
+        if flow == "20308c47-002a-446c-a4f8-a21482f66bc8":
+            #Reinscription
+            payload["message"] = "reinscription"
+        else:
+            #First time
+            payload["message"] = "altagobmx"
+        r = requests.get(RP_URL, params = payload)
         if r.ok:
             return json.dumps({"request":"done"})
 
